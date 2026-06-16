@@ -53,6 +53,7 @@ var style_EibCcl_Numeracion_Catastro_3 = function(feature, resolution){
     if ("" !== null) {
         labelText = String(valueNUM + valueLETRA);
     }
+    var radioCirculo = 12;
     
    
     
@@ -109,6 +110,7 @@ switch(nombreNUCLEO) {
     case '89 - LG / LAIOSO': circleFill = 'rgba(51,234,57,0.700)'; break;
     case '90 - LG / PINTO (O)': circleFill = 'rgba(83,106,207,0.700)'; break;
     case '91 - LG / REBORDIÑOS': circleFill = 'rgba(88,233,20,0.700)'; break;
+    default: radioCirculo = 0; break;
 }
 
 
@@ -117,7 +119,7 @@ var style = [
             // 1. EL CÍRCULO
             new ol.style.Style({
                 image: new ol.style.Circle({
-                    radius: 12,
+                    radius: radioCirculo,
                     displacement: [offsetX, offsetY], // Tu desplazamiento original del círculo
                     stroke: new ol.style.Stroke({
                         color: circleFill,
