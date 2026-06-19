@@ -150,19 +150,6 @@ var group_Eib_Tipo = new ol.layer.Group({
 // OTROS GRUPOS DEL MAPA ORIGINAL
 // =========================================================================
 
-var group_Auxiliares = new ol.layer.Group({
-    layers: [],
-    fold: 'open',
-    title: 'Auxiliares'
-});
-
-
-
-var group_Eib_Trabajo_Vacio = new ol.layer.Group({
-    layers: [],
-    fold: 'open',
-    title: 'Eib_Trabajo'
-});
 
 var group_Varios = new ol.layer.Group({
     layers: [lyr_GoogleSatellite_0, lyr_Ortoimagen_1, lyr_Catastro_2],
@@ -176,6 +163,90 @@ var group_Cartografia = new ol.layer.Group({
     title: 'Cartografia'
 });
 
+
+
+
+
+
+
+
+
+
+var format_Eib_Ejes_0 = new ol.format.GeoJSON();
+var features_Eib_Ejes_0 = format_Eib_Ejes_0.readFeatures(json_Eib_Ejes_0, 
+            {dataProjection: 'EPSG:4326', featureProjection: 'EPSG:3857'});
+var jsonSource_Eib_Ejes_0 = new ol.source.Vector({
+    attributions: ' ',
+});
+jsonSource_Eib_Ejes_0.addFeatures(features_Eib_Ejes_0);
+var lyr_Eib_Ejes_0 = new ol.layer.Vector({
+                declutter: false,
+                source:jsonSource_Eib_Ejes_0, 
+                style: style_Eib_Ejes_0,
+                popuplayertitle: ' Eib_Ejes',
+                interactive: true,
+    title: 'Ejes de vía<br />'
+/*    <img src="styles/legend/Eib_Ejes_0_0.png" /> 60<br />\
+    <img src="styles/legend/Eib_Ejes_0_1.png" /> 85<br />\
+    <img src="styles/legend/Eib_Ejes_0_2.png" /> 94<br />\
+    <img src="styles/legend/Eib_Ejes_0_3.png" /> 95<br />\
+    <img src="styles/legend/Eib_Ejes_0_4.png" /> 98<br />\
+    <img src="styles/legend/Eib_Ejes_0_5.png" /> 101<br />\
+    <img src="styles/legend/Eib_Ejes_0_6.png" /> 103<br />\
+    <img src="styles/legend/Eib_Ejes_0_7.png" /> 105<br />\
+    <img src="styles/legend/Eib_Ejes_0_8.png" /> 107<br />\
+    <img src="styles/legend/Eib_Ejes_0_9.png" /> 108<br />\
+    <img src="styles/legend/Eib_Ejes_0_10.png" /> 109<br />\
+    <img src="styles/legend/Eib_Ejes_0_11.png" /> 111<br />\
+    <img src="styles/legend/Eib_Ejes_0_12.png" /> 112<br />\
+    <img src="styles/legend/Eib_Ejes_0_13.png" /> 114<br />\
+    <img src="styles/legend/Eib_Ejes_0_14.png" /> 115<br />\
+    <img src="styles/legend/Eib_Ejes_0_15.png" /> 120<br />\
+    <img src="styles/legend/Eib_Ejes_0_16.png" /> 121<br />\
+    <img src="styles/legend/Eib_Ejes_0_17.png" /> 5002<br />\
+    <img src="styles/legend/Eib_Ejes_0_18.png" /> 5003<br />\
+    <img src="styles/legend/Eib_Ejes_0_19.png" /> 5004<br />\
+    <img src="styles/legend/Eib_Ejes_0_20.png" /> 5005<br />\
+    <img src="styles/legend/Eib_Ejes_0_21.png" /> 5006<br />\
+    <img src="styles/legend/Eib_Ejes_0_22.png" /> 5007<br />\
+    <img src="styles/legend/Eib_Ejes_0_23.png" /> 5008<br />\
+    <img src="styles/legend/Eib_Ejes_0_24.png" /> 5009<br />\
+    <img src="styles/legend/Eib_Ejes_0_25.png" /> 5010<br />\
+    <img src="styles/legend/Eib_Ejes_0_26.png" /> 5011<br />\
+    <img src="styles/legend/Eib_Ejes_0_27.png" /> 5016<br />\
+    <img src="styles/legend/Eib_Ejes_0_28.png" /> 5017<br />\
+    <img src="styles/legend/Eib_Ejes_0_29.png" /> 5018<br />\
+    <img src="styles/legend/Eib_Ejes_0_30.png" /> 5019<br />\
+    <img src="styles/legend/Eib_Ejes_0_31.png" /> 5020<br />\
+    <img src="styles/legend/Eib_Ejes_0_32.png" /> 5021<br />\
+    <img src="styles/legend/Eib_Ejes_0_33.png" /> 5022<br />\
+    <img src="styles/legend/Eib_Ejes_0_34.png" /> <br />'  */
+    });
+//var group_Eib_Trabajo = new ol.layer.Group({
+//                                layers: [lyr_Eib_Ejes_0,],
+//                                fold: 'open',
+//                                title: 'EJES VIA'});
+
+lyr_Eib_Ejes_0.setVisible(true);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var format_Eib_Lugares_0 = new ol.format.GeoJSON();
 var features_Eib_Lugares_0 = format_Eib_Lugares_0.readFeatures(json_Eib_Lugares_0, 
             {dataProjection: 'EPSG:4326', featureProjection: 'EPSG:3857'});
@@ -188,9 +259,9 @@ var lyr_Eib_Lugares_0 = new ol.layer.Vector({
     style: style_Eib_Lugares_0,
     popuplayertitle: 'Vías/Lugares Esgos',
     interactive: true,
-    opacity: 0.60000,
-  /*  title: 'Vías/Lugares Esgos<br />\
-    <img src="styles/legend/Eib_Lugares_0_124.png" />  5 - LG / PARADELA<br />\
+    opacity: 0.50000,
+    title: 'Núcleos<br />'
+/*    <img src="styles/legend/Eib_Lugares_0_124.png" />  5 - LG / PARADELA<br />\
     <img src="styles/legend/Eib_Lugares_0_104.png" />  10 - LG / PARDECONDE<br />\
     <img src="styles/legend/Eib_Lugares_0_105.png" />  12 - AL / ABELLEIRA<br />\
     <img src="styles/legend/Eib_Lugares_0_106.png" />  13 - CS / CASANOVA<br />\
@@ -245,10 +316,16 @@ var lyr_Eib_Lugares_0 = new ol.layer.Vector({
 });
 
 var group_Eib_Trabajo = new ol.layer.Group({
-    layers: [lyr_Eib_Lugares_0],
-    fold: 'close',
-    title: 'NUCLEOS'
+    layers: [lyr_Eib_Lugares_0,lyr_Eib_Ejes_0],
+    fold: 'open',
+    title: 'NUCLEOS y EJES VIA'
 });
+
+
+
+
+
+
 
 // Visibilidades iniciales de arranque (Por defecto arrancamos mostrando Estado de Conservación)
 lyr_GoogleSatellite_0.setVisible(true);
