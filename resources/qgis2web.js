@@ -89,6 +89,9 @@ var content = document.getElementById('popup-content');
 var closer = document.getElementById('popup-closer');
 var sketch;
 
+container.style.maxWidth = '310px';
+container.style.minWidth = '260px';
+
 function stopMediaInPopup() {
     var mediaElements = container.querySelectorAll('audio, video');
     mediaElements.forEach(function(media) {
@@ -528,7 +531,7 @@ function onSingleClickFeatures(evt) {
     var clusteredFeatures;
     
     // Contenedor principal de la ficha técnica estilizada
-    var popupText = '<div class="popup-wrapper" style="font-family: system-ui, -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif; min-width: 150px; max-width: 400px; color: #1a1a1a; padding: 4px;">';
+    var popupText = '<div class="popup-wrapper" style="font-family: system-ui, -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif; min-width: 150px; max-width: 290px; color: #1a1a1a; padding: 4px;">';
     var hasFeature = false;
     
     map.forEachFeatureAtPixel(pixel, function(feature, layer) {

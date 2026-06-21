@@ -459,8 +459,8 @@ var style_Eib_Lugares_0 = function(feature, resolution){
    var valueEibCodVia = feature.get("EibCodVia");
    var valueEibCcl_Callejero_eibTipVia = feature.get("EibCcl_Callejero_eibTipVia");
    var valueEibCcl_Callejero_eibNomVia = feature.get("EibCcl_Callejero_eibNomVia");
-   var direccion = " " + valueEibCodVia + " - " + valueEibCcl_Callejero_eibTipVia + " / " + valueEibCcl_Callejero_eibNomVia
-      
+   //var direccion = " " + valueEibCodVia + " - " + valueEibCcl_Callejero_eibTipVia + " / " + valueEibCcl_Callejero_eibNomVia
+    var direccion = valueEibCcl_Callejero_eibTipVia + " / " + valueEibCcl_Callejero_eibNomVia;  
     var labelFont = "bold 20.0px 'Arial', sans-serif";
     var labelFill = "#ff0000";
     var bufferColor = "#ffffff";

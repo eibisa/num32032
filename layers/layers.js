@@ -41,6 +41,26 @@ var lyr_Catastro_2 = new ol.layer.Image({
 });
 wms_layers.push([lyr_Catastro_2, 0]);
 
+
+var format_Eib_Parroquias_0 = new ol.format.GeoJSON();
+var features_Eib_Parroquias_0 = format_Eib_Parroquias_0.readFeatures(json_Eib_Parroquias_0, 
+            {dataProjection: 'EPSG:4326', featureProjection: 'EPSG:3857'});
+var jsonSource_Eib_Parroquias_0 = new ol.source.Vector({
+    attributions: ' ',
+});
+jsonSource_Eib_Parroquias_0.addFeatures(features_Eib_Parroquias_0);
+var lyr_Eib_Parroquias_0 = new ol.layer.Vector({
+                declutter: false,
+                source:jsonSource_Eib_Parroquias_0, 
+                style: style_Eib_Parroquias_0,
+                popuplayertitle: 'Parroquias',
+                interactive: true,
+                title: '<img src="styles/legend/Eib_Parroquias_0.png" /> Parroquias'
+            });
+
+
+
+
 // =========================================================================
 // LECTURA DEL GEOJSON ORIGINAL (UNA SOLA VEZ)
 // =========================================================================
@@ -80,31 +100,31 @@ source_Vacio.addFeatures(features_EibCcl_Numeracion_Catastro_3.filter(function(f
 var resoluciones = { maxResolution: 14.282277737653603, minResolution: 0.00028004466152261963 };
 
 var lyr_Bueno = new ol.layer.Vector({
-    declutter: false, source: source_Bueno, style: style_EibCcl_Numeracion_Catastro_3, interactive: true,
+    declutter: false, source: source_Bueno, style: estiloGrupoConservacion, interactive: true,
     maxResolution: resoluciones.maxResolution, minResolution: resoluciones.minResolution,
     popuplayertitle: 'Numeración Esgos', title: '<img src="styles/legend/ECONS_BUENO.png" /> Bueno'
 });
 
 var lyr_Regular = new ol.layer.Vector({
-    declutter: false, source: source_Regular, style: style_EibCcl_Numeracion_Catastro_3, interactive: true,
+    declutter: false, source: source_Regular, style: estiloGrupoConservacion, interactive: true,
     maxResolution: resoluciones.maxResolution, minResolution: resoluciones.minResolution,
     popuplayertitle: 'Numeración Esgos', title: '<img src="styles/legend/ECONS_REGULAR.png" /> Regular'
 });
 
 var lyr_Malo = new ol.layer.Vector({
-    declutter: false, source: source_Malo, style: style_EibCcl_Numeracion_Catastro_3, interactive: true,
+    declutter: false, source: source_Malo, style: estiloGrupoConservacion, interactive: true,
     maxResolution: resoluciones.maxResolution, minResolution: resoluciones.minResolution,
     popuplayertitle: 'Numeración Esgos', title: '<img src="styles/legend/ECONS_MALO.png" /> Malo'
 });
 
 var lyr_Ruina = new ol.layer.Vector({
-    declutter: false, source: source_Ruina, style: style_EibCcl_Numeracion_Catastro_3, interactive: true,
+    declutter: false, source: source_Ruina, style: estiloGrupoConservacion, interactive: true,
     maxResolution: resoluciones.maxResolution, minResolution: resoluciones.minResolution,
     popuplayertitle: 'Numeración Esgos', title: '<img src="styles/legend/ECONS_RUINA.png" /> Ruina'
 });
 
 var lyr_Vacio = new ol.layer.Vector({
-    declutter: false, source: source_Vacio, style: style_EibCcl_Numeracion_Catastro_3, interactive: true,
+    declutter: false, source: source_Vacio, style: estiloGrupoConservacion, interactive: true,
     maxResolution: resoluciones.maxResolution, minResolution: resoluciones.minResolution,
     popuplayertitle: 'Numeración Esgos', title: '<img src="styles/legend/ECONS_VACIO.png" /> Suelos'
 });
@@ -115,6 +135,28 @@ var group_Eib_ECons = new ol.layer.Group({
     title: 'ESTADO DE CONSERVACIÓN'
 });
 
+var source_Tipo = new ol.source.Vector({ attributions: ' ' });
+// Añadimos todos los elementos directamente sin pasar ningún .filter()
+source_Tipo.addFeatures(features_EibCcl_Numeracion_Catastro_3);
+
+var lyr_Tipo = new ol.layer.Vector({
+    declutter: false, 
+    source: source_Tipo, 
+    style: estiloGrupoTipo, 
+    interactive: true,
+    maxResolution: resoluciones.maxResolution, 
+    minResolution: resoluciones.minResolution,
+    popuplayertitle: 'Numeración Esgos', 
+    title: '<img src="styles/legend/ECONS_VACIO.png" /> Numeración'
+});
+
+var group_Eib_Tipo = new ol.layer.Group({
+    layers: [lyr_Tipo],
+    fold: 'close',
+    title: 'NUMERACIÓN'
+});
+
+/*
 // =========================================================================
 // GRUPO 2: TIPO DE EDIFICACIÓN (FILTRADO POR EN1_TIPO)
 // =========================================================================
@@ -129,13 +171,13 @@ source_Tipo_N2.addFeatures(features_EibCcl_Numeracion_Catastro_3.filter(function
 }));
 
 var lyr_Tipo_N1 = new ol.layer.Vector({
-    declutter: false, source: source_Tipo_N1, style: style_EibCcl_Numeracion_Catastro_3, interactive: true,
+    declutter: false, source: source_Tipo_N1, style: estiloGrupoTipo, interactive: true,
     maxResolution: resoluciones.maxResolution, minResolution: resoluciones.minResolution,
     popuplayertitle: 'Numeración Esgos', title: '<img src="styles/legend/ECONS_VACIO.png" /> Tipo N1'
 });
 
 var lyr_Tipo_N2 = new ol.layer.Vector({
-    declutter: false, source: source_Tipo_N2, style: style_EibCcl_Numeracion_Catastro_3, interactive: true,
+    declutter: false, source: source_Tipo_N2, style: estiloGrupoTipo, interactive: true,
     maxResolution: resoluciones.maxResolution, minResolution: resoluciones.minResolution,
     popuplayertitle: 'Numeración Esgos', title: '<img src="styles/legend/ECONS_VACIO.png" /> Tipo N2'
 });
@@ -143,8 +185,8 @@ var lyr_Tipo_N2 = new ol.layer.Vector({
 var group_Eib_Tipo = new ol.layer.Group({
     layers: [lyr_Tipo_N1, lyr_Tipo_N2],
     fold: 'close',
-    title: 'TIPO DE NUMERACIÓN'
-});
+    title: 'NUMERACIÓN'
+});*/
 
 // =========================================================================
 // OTROS GRUPOS DEL MAPA ORIGINAL
@@ -152,22 +194,34 @@ var group_Eib_Tipo = new ol.layer.Group({
 
 
 var group_Varios = new ol.layer.Group({
-    layers: [lyr_GoogleSatellite_0, lyr_Ortoimagen_1, lyr_Catastro_2],
+    layers: [lyr_GoogleSatellite_0, lyr_Ortoimagen_1, lyr_Catastro_2, lyr_Eib_Parroquias_0],
     fold: 'open',
     title: 'AUXILIARES'
 });
 
-var group_Cartografia = new ol.layer.Group({
-    layers: [],
-    fold: 'close',
-    title: 'Cartografia'
+var bloqueandoBase = false;
+var mapasBase = [lyr_GoogleSatellite_0, lyr_Ortoimagen_1];
+
+mapasBase.forEach(function(capaActual) {
+    capaActual.on('change:visible', function() {
+        // Si ya estamos en proceso de apagar una capa, salimos para evitar bucles
+        if (bloqueandoBase) return;
+        
+        // Si el usuario acaba de encender esta capa...
+        if (capaActual.getVisible()) {
+            bloqueandoBase = true;
+            
+            // Recorremos la otra capa base y la apagamos
+            mapasBase.forEach(function(otraCapa) {
+                if (otraCapa !== capaActual) {
+                    otraCapa.setVisible(false);
+                }
+            });
+            
+            bloqueandoBase = false;
+        }
+    });
 });
-
-
-
-
-
-
 
 
 
@@ -186,66 +240,9 @@ var lyr_Eib_Ejes_0 = new ol.layer.Vector({
                 popuplayertitle: ' Eib_Ejes',
                 interactive: true,
     title: 'Ejes de vía<br />'
-/*    <img src="styles/legend/Eib_Ejes_0_0.png" /> 60<br />\
-    <img src="styles/legend/Eib_Ejes_0_1.png" /> 85<br />\
-    <img src="styles/legend/Eib_Ejes_0_2.png" /> 94<br />\
-    <img src="styles/legend/Eib_Ejes_0_3.png" /> 95<br />\
-    <img src="styles/legend/Eib_Ejes_0_4.png" /> 98<br />\
-    <img src="styles/legend/Eib_Ejes_0_5.png" /> 101<br />\
-    <img src="styles/legend/Eib_Ejes_0_6.png" /> 103<br />\
-    <img src="styles/legend/Eib_Ejes_0_7.png" /> 105<br />\
-    <img src="styles/legend/Eib_Ejes_0_8.png" /> 107<br />\
-    <img src="styles/legend/Eib_Ejes_0_9.png" /> 108<br />\
-    <img src="styles/legend/Eib_Ejes_0_10.png" /> 109<br />\
-    <img src="styles/legend/Eib_Ejes_0_11.png" /> 111<br />\
-    <img src="styles/legend/Eib_Ejes_0_12.png" /> 112<br />\
-    <img src="styles/legend/Eib_Ejes_0_13.png" /> 114<br />\
-    <img src="styles/legend/Eib_Ejes_0_14.png" /> 115<br />\
-    <img src="styles/legend/Eib_Ejes_0_15.png" /> 120<br />\
-    <img src="styles/legend/Eib_Ejes_0_16.png" /> 121<br />\
-    <img src="styles/legend/Eib_Ejes_0_17.png" /> 5002<br />\
-    <img src="styles/legend/Eib_Ejes_0_18.png" /> 5003<br />\
-    <img src="styles/legend/Eib_Ejes_0_19.png" /> 5004<br />\
-    <img src="styles/legend/Eib_Ejes_0_20.png" /> 5005<br />\
-    <img src="styles/legend/Eib_Ejes_0_21.png" /> 5006<br />\
-    <img src="styles/legend/Eib_Ejes_0_22.png" /> 5007<br />\
-    <img src="styles/legend/Eib_Ejes_0_23.png" /> 5008<br />\
-    <img src="styles/legend/Eib_Ejes_0_24.png" /> 5009<br />\
-    <img src="styles/legend/Eib_Ejes_0_25.png" /> 5010<br />\
-    <img src="styles/legend/Eib_Ejes_0_26.png" /> 5011<br />\
-    <img src="styles/legend/Eib_Ejes_0_27.png" /> 5016<br />\
-    <img src="styles/legend/Eib_Ejes_0_28.png" /> 5017<br />\
-    <img src="styles/legend/Eib_Ejes_0_29.png" /> 5018<br />\
-    <img src="styles/legend/Eib_Ejes_0_30.png" /> 5019<br />\
-    <img src="styles/legend/Eib_Ejes_0_31.png" /> 5020<br />\
-    <img src="styles/legend/Eib_Ejes_0_32.png" /> 5021<br />\
-    <img src="styles/legend/Eib_Ejes_0_33.png" /> 5022<br />\
-    <img src="styles/legend/Eib_Ejes_0_34.png" /> <br />'  */
     });
-//var group_Eib_Trabajo = new ol.layer.Group({
-//                                layers: [lyr_Eib_Ejes_0,],
-//                                fold: 'open',
-//                                title: 'EJES VIA'});
 
 lyr_Eib_Ejes_0.setVisible(true);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 var format_Eib_Lugares_0 = new ol.format.GeoJSON();
 var features_Eib_Lugares_0 = format_Eib_Lugares_0.readFeatures(json_Eib_Lugares_0, 
@@ -261,61 +258,9 @@ var lyr_Eib_Lugares_0 = new ol.layer.Vector({
     interactive: true,
     opacity: 0.50000,
     title: 'Núcleos<br />'
-/*    <img src="styles/legend/Eib_Lugares_0_124.png" />  5 - LG / PARADELA<br />\
-    <img src="styles/legend/Eib_Lugares_0_104.png" />  10 - LG / PARDECONDE<br />\
-    <img src="styles/legend/Eib_Lugares_0_105.png" />  12 - AL / ABELLEIRA<br />\
-    <img src="styles/legend/Eib_Lugares_0_106.png" />  13 - CS / CASANOVA<br />\
-    <img src="styles/legend/Eib_Lugares_0_107.png" />  14 - LG / MARCELLE<br />\
-    <img src="styles/legend/Eib_Lugares_0_108.png" />  17 - LG / SAN MIGUEL<br />\
-    <img src="styles/legend/Eib_Lugares_0_109.png" />  19 - LG / BARRIO (O)<br />\
-    <img src="styles/legend/Eib_Lugares_0_110.png" />  20 - LG / CARBALLEIRA (A)<br />\
-    <img src="styles/legend/Eib_Lugares_0_111.png" />  21 - AL / CARBUIZ<br />\
-    <img src="styles/legend/Eib_Lugares_0_112.png" />  24 - LG / ESPADANEDO<br />\
-    <img src="styles/legend/Eib_Lugares_0_113.png" />  25 - LG / GRAÑA (A)<br />\
-    <img src="styles/legend/Eib_Lugares_0_114.png" />  26 - LG / MATO (O)<br />\
-    <img src="styles/legend/Eib_Lugares_0_115.png" />  27 - LG / REBOREDA (A)<br />\
-    <img src="styles/legend/Eib_Lugares_0_116.png" />  28 - AL / SAN PEDRO<br />\
-    <img src="styles/legend/Eib_Lugares_0_117.png" />  29 - LG / VEIGA (A)<br />\
-    <img src="styles/legend/Eib_Lugares_0_118.png" />  30 - LG / VILARIÑO<br />\
-    <img src="styles/legend/Eib_Lugares_0_119.png" />  32 - LG / VEIGACHA<br />\
-    <img src="styles/legend/Eib_Lugares_0_120.png" />  37 - PZ / AMIGOS (DOS)<br />\
-    <img src="styles/legend/Eib_Lugares_0_121.png" />  38 - RU / BARREIRA (DA)<br />\
-    <img src="styles/legend/Eib_Lugares_0_122.png" />  46 - RU / RELOXEIRO<br />\
-    <img src="styles/legend/Eib_Lugares_0_123.png" />  48 - RU / CELAREIRA<br />\
-    <img src="styles/legend/Eib_Lugares_0_125.png" />  50 - PZ / FONTE (DA)<br />\
-    <img src="styles/legend/Eib_Lugares_0_143.png" />  52 - CR / GRAÑA (DA)<br />\
-    <img src="styles/legend/Eib_Lugares_0_144.png" />  55 - RU / OBELLARIZA<br />\
-    <img src="styles/legend/Eib_Lugares_0_145.png" />  59 - RU / SAN SALVADOR<br />\
-    <img src="styles/legend/Eib_Lugares_0_146.png" />  65 - RU / CARBALLO (DO)<br />\
-    <img src="styles/legend/Eib_Lugares_0_147.png" />  68 - RU / DON HERMOGENES GONZALEZ BLANCO<br />\
-    <img src="styles/legend/Eib_Lugares_0_148.png" />  69 - AV / Esgos<br />\
-    <img src="styles/legend/Eib_Lugares_0_149.png" />  70 - RU / MANUEL GARRIDO<br />\
-    <img src="styles/legend/Eib_Lugares_0_150.png" />  71 - RU / CASETAS<br />\
-    <img src="styles/legend/Eib_Lugares_0_151.png" />  72 - LG / RAMIL<br />\
-    <img src="styles/legend/Eib_Lugares_0_152.png" />  73 - RU / BARBEITOS<br />\
-    <img src="styles/legend/Eib_Lugares_0_153.png" />  74 - RU / PENEDIÑO (O)<br />\
-    <img src="styles/legend/Eib_Lugares_0_154.png" />  75 - RU / VEIGAS (AS)<br />\
-    <img src="styles/legend/Eib_Lugares_0_126.png" />  5001 - RU / CAMPO (O)<br />\
-    <img src="styles/legend/Eib_Lugares_0_127.png" />  5002 - CR / COMARCAL 536<br />\
-    <img src="styles/legend/Eib_Lugares_0_128.png" />  5003 - RU / ICHO (O)<br />\
-    <img src="styles/legend/Eib_Lugares_0_129.png" />  5004 - RU / NIÑODAGUIA<br />\
-    <img src="styles/legend/Eib_Lugares_0_130.png" />  5005 - RU / PICOTA O MAIO (DA)<br />\
-    <img src="styles/legend/Eib_Lugares_0_131.png" />  5006 - RU / PUMAR (O)<br />\
-    <img src="styles/legend/Eib_Lugares_0_132.png" />  5007 - RU / QUINTAIRAS (AS)<br />\
-    <img src="styles/legend/Eib_Lugares_0_133.png" />  5008 - RU / BARRIO (DO)<br />\
-    <img src="styles/legend/Eib_Lugares_0_134.png" />  5009 - RU / LAGAS (DAS)<br />\
-    <img src="styles/legend/Eib_Lugares_0_135.png" />  5010 - RU / PARDECONDE<br />\
-    <img src="styles/legend/Eib_Lugares_0_136.png" />  5011 - RU / RIAL<br />\
-    <img src="styles/legend/Eib_Lugares_0_137.png" />  5012 - RU / VAZQUEZ PORTOMEÑE<br />\
-    <img src="styles/legend/Eib_Lugares_0_138.png" />  5013 - RU / MOSTEIROS (OS)<br />\
-    <img src="styles/legend/Eib_Lugares_0_139.png" />  5014 - TR / Esgos<br />\
-    <img src="styles/legend/Eib_Lugares_0_140.png" />  5015 - RU / RIO (O)<br />\
-    <img src="styles/legend/Eib_Lugares_0_141.png" />  5016 - CR / REBOREDA (A)<br />\
-    <img src="styles/legend/Eib_Lugares_0_142.png" />  5017 - CR / CERAMICAS (DAS)<br />\
-    <img src="styles/legend/Eib_Lugares_0_155.png" /> <br />'*/
 });
 
-var group_Eib_Trabajo = new ol.layer.Group({
+var group_Nucleos_y_Ejes = new ol.layer.Group({
     layers: [lyr_Eib_Lugares_0,lyr_Eib_Ejes_0],
     fold: 'open',
     title: 'NUCLEOS y EJES VIA'
@@ -332,11 +277,47 @@ lyr_GoogleSatellite_0.setVisible(true);
 lyr_Ortoimagen_1.setVisible(false);
 lyr_Catastro_2.setVisible(false);
 
-lyr_Bueno.setVisible(true); lyr_Regular.setVisible(true); lyr_Malo.setVisible(true); lyr_Ruina.setVisible(true); lyr_Vacio.setVisible(true);
-lyr_Tipo_N1.setVisible(false); lyr_Tipo_N2.setVisible(false); // Tipo arranca apagado para ser excluyente
+lyr_Bueno.setVisible(false); lyr_Regular.setVisible(false); lyr_Malo.setVisible(false); lyr_Ruina.setVisible(false); lyr_Vacio.setVisible(false);
+//lyr_Tipo_N1.setVisible(false); lyr_Tipo_N2.setVisible(false); // Tipo arranca apagado para ser excluyente
+lyr_Tipo.setVisible(true);
+group_Eib_ECons.setVisible(false); group_Eib_Tipo.setVisible(true); // Tipo arranca apagado para ser excluyente
 
-//var layersList = [group_Varios, group_Eib_ECons, group_Eib_Tipo, group_Eib_Trabajo];
-var layersList = [group_Varios, group_Eib_ECons, group_Eib_Trabajo];
+
+//var layersList = [group_Varios, group_Eib_ECons, group_Eib_Tipo, group_Nucleos_y_Ejes];
+// =========================================================================
+// GRUPO MAESTRO DEL MUNICIPIO (SIN CHECKBOX TOTAL)
+// =========================================================================
+var group_Municipio_Esgos = new ol.layer.Group({
+    layers: [group_Varios, group_Eib_ECons, group_Eib_Tipo, group_Nucleos_y_Ejes],
+    fold: 'open', // 'open' para que arranque abierto, 'close' para que arranque cerrado
+    title: '<span class="titulo-municipio-cabecera">MUNICIPIO DE ESGOS</span>'
+});
+
+// Pasamos únicamente el grupo maestro a la lista oficial de capas
+var layersList = [group_Municipio_Esgos];
+
+// Inyectamos dinámicamente el estilo CSS para hacer desaparecer el checkbox
+var estiloMenu = document.createElement('style');
+estiloMenu.innerHTML = `
+    /* Busca el elemento de la lista que contiene nuestro título y oculta su checkbox */
+    li:has(.titulo-municipio-cabecera) > input[type="checkbox"] {
+        display: none !important;
+    }
+    
+    /* Estilizamos el texto para que actúe como un verdadero encabezado de menú */
+    li:has(.titulo-municipio-cabecera) > label {
+        font-weight: bold !important;
+        font-size: 1.15em !important;
+        color: #2c3e50 !important;
+        cursor: default !important;
+        pointer-events: none; /* Evita que hacer clic en el texto intente alternar visibilidad */
+    }
+`;
+document.head.appendChild(estiloMenu);
+// =========================================================================
+
+
+//var layersList = [group_Varios, group_Eib_Tipo, group_Eib_ECons, group_Nucleos_y_Ejes];
 // =========================================================================
 // CAPA GLOBAL INVISIBLE PARA EL BUSCADOR DE QGIS2WEB
 // =========================================================================
@@ -345,7 +326,7 @@ source_Completo.addFeatures(features_EibCcl_Numeracion_Catastro_3);
 var lyr_EibCcl_Numeracion_Catastro_3 = new ol.layer.Vector({ source: source_Completo });
 
 // Asignación en bloque de metadatos, alias, labels e interacción
-var subCapas = [lyr_Bueno, lyr_Regular, lyr_Malo, lyr_Ruina, lyr_Vacio, lyr_Tipo_N1, lyr_Tipo_N2];
+var subCapas = [lyr_Bueno, lyr_Regular, lyr_Malo, lyr_Ruina, lyr_Vacio, lyr_Tipo];
 subCapas.forEach(function(lyr) {
     lyr.set('fieldAliases', {'fid': 'fid', 'REFCAT': 'REF. CATASTRAL', 'EibCcl_Callejero_eibEntAgp': 'PARROQUIA', 'EibCcl_Callejero_eibTipVia': 'SIGLA', 'EibCcl_Callejero_eibNomVia': 'VIA/LUGAR', 'ENH_CV_00': 'ENH_CV_00', 'ENH_N1_00': 'ENH_N1_00', 'ENH_L1_00': 'ENH_L1_00', 'ENH_MARCA': 'ENH_MARCA', 'ENC_CV_00': 'ENC_CV_00', 'ENC_N1_00': 'ENC_N1_00', 'ENC_L1_00': 'ENC_L1_00', 'ENC_MARCA': 'ENC_MARCA', 'ENA_CV_00': 'ENA_CV_00', 'ENA_N1_00': 'ENA_N1_00', 'ENA_L1_00': 'ENA_L1_00', 'ENA_MARCA': 'ENA_MARCA', 'ENP_CV_00': 'ENP_CV_00', 'ENP_N1_00': 'ENP_N1_00', 'ENP_L1_00': 'ENP_L1_00', 'ENP_MARCA': 'ENP_MARCA', 'END_CV_00': 'END_CV_00', 'END_N1_00': 'NUMERO', 'END_L1_00': 'LETRA', 'END_MARCA': 'END_MARCA', 'EN1_TIPO': 'EN1_TIPO', 'NOMVIA': 'EN1_NOMVIA', 'EN1_PRQ': 'EN1_PRQ', 'EN1_SGVIA': 'EN1_SGVIA', 'Copia_5': 'Copia_5', 'Copia_6': 'Copia_6', 'Copia_7': 'Copia_7', 'Copia_8': 'Copia_8', 'DUPLICADOS': 'DUPLICADOS', 'rotation': 'rotation', 'CV_NUM': 'CV_NUM', 'ID_CV_NA': 'ID_CV_NA', 'ID_CV_NP': 'ID_CV_NP', 'ID_MODIF': 'MODIFICACION', 'ID_CV_ND': 'ID_CV_ND', 'DIRECCION': 'DIRECCION', 'FOTOS_codmun': 'FOTOS_codmun', 'FOTOS_foto_01': 'Foto_01', 'FOTOS_foto_02': 'Foto_02', 'FOTOS_foto_03': 'Foto_03', 'FOTOS_foto_04': 'Foto_04', 'FOTOS_foto_05': 'Foto_05', 'FOTOS_foto_06': 'Foto_06', 'FOTOS_foto_07': 'Foto_07', 'FOTOS_foto_08': 'Foto_08', 'FOTOS_foto_09': 'Foto_09', 'ESTADOS_CONS_Estado_Conservacion': 'Est. Conserv.', });
     lyr.set('fieldImages', {'fid': 'TextEdit', 'REFCAT': 'TextEdit', 'EibCcl_Callejero_eibEntAgp': 'TextEdit', 'EibCcl_Callejero_eibTipVia': 'TextEdit', 'ENH_CV_00': 'Range', 'ENH_N1_00': 'Range', 'ENH_L1_00': 'TextEdit', 'ENH_MARCA': 'TextEdit', 'ENC_CV_00': 'Range', 'ENC_N1_00': 'Range', 'ENC_L1_00': 'TextEdit', 'ENC_MARCA': 'TextEdit', 'ENA_CV_00': 'Range', 'ENA_N1_00': 'Range', 'ENA_L1_00': 'TextEdit', 'ENA_MARCA': 'TextEdit', 'ENP_CV_00': 'Range', 'ENP_N1_00': 'Range', 'ENP_L1_00': 'TextEdit', 'ENP_MARCA': 'TextEdit', 'END_CV_00': 'Range', 'END_N1_00': 'Range', 'END_L1_00': 'TextEdit', 'END_MARCA': 'TextEdit', 'EN1_TIPO': 'TextEdit', 'EN1_NOMVIA': 'TextEdit', 'EN1_PRQ': 'TextEdit', 'EN1_SGVIA': 'TextEdit', 'Copia_5': 'TextEdit', 'Copia_6': 'TextEdit', 'Copia_7': 'TextEdit', 'Copia_8': 'TextEdit', 'DUPLICADOS': 'TextEdit', 'rotation': 'TextEdit', 'EibCcl_Callejero_eibNomVia': 'TextEdit', 'CV_NUM': 'TextEdit', 'ID_CV_NA': 'Range', 'ID_CV_NP': 'Range', 'ID_MODIF': 'TextEdit', 'ID_CV_ND': 'Range', 'DIRECCION': 'TextEdit', 'FOTOS_codmun': 'TextEdit', 'FOTOS_foto_01': 'TextEdit', 'FOTOS_foto_02': 'TextEdit', 'FOTOS_foto_03': 'TextEdit', 'FOTOS_foto_04': 'TextEdit', 'FOTOS_foto_05': 'TextEdit', 'FOTOS_foto_06': 'TextEdit', 'FOTOS_foto_07': 'TextEdit', 'FOTOS_foto_08': 'TextEdit', 'FOTOS_foto_09': 'TextEdit', 'ESTADOS_CONS_Estado_Conservacion': '', });
@@ -361,8 +342,9 @@ lyr_Eib_Lugares_0.on('precompose', function(evt) {
 });
 
 lyr_Eib_Lugares_0.setZIndex(10);
+lyr_Eib_Ejes_0.setZIndex(10);
 lyr_Bueno.setZIndex(100); lyr_Regular.setZIndex(100); lyr_Malo.setZIndex(100); lyr_Ruina.setZIndex(100); lyr_Vacio.setZIndex(100);
-lyr_Tipo_N1.setZIndex(100); lyr_Tipo_N2.setZIndex(100);
+lyr_Tipo.setZIndex(100);
 
 // =========================================================================
 // SCRIPT DE EXCLUSIVIDAD MUTUA EN LEYENDA (AUTOMÁTICO)
@@ -370,7 +352,7 @@ lyr_Tipo_N1.setZIndex(100); lyr_Tipo_N2.setZIndex(100);
 var bloqueandoEventos = false;
 
 var capasConservacion = [lyr_Bueno, lyr_Regular, lyr_Malo, lyr_Ruina, lyr_Vacio];
-var capasTipo = [lyr_Tipo_N1, lyr_Tipo_N2];
+var capasTipo = [lyr_Tipo];
 
 // Evento: Al activar algo en Conservación, se apaga Tipo
 capasConservacion.forEach(function(capa) {
