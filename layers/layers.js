@@ -126,7 +126,7 @@ var lyr_Ruina = new ol.layer.Vector({
 var lyr_Vacio = new ol.layer.Vector({
     declutter: false, source: source_Vacio, style: estiloGrupoConservacion, interactive: true,
     maxResolution: resoluciones.maxResolution, minResolution: resoluciones.minResolution,
-    popuplayertitle: 'Numeración Esgos', title: '<img src="styles/legend/ECONS_VACIO.png" /> Suelos'
+    popuplayertitle: 'Numeración Esgos', title: '<img src="styles/legend/ECONS_VACIO.png" /> Sin definir'
 });
 
 var group_Eib_ECons = new ol.layer.Group({
